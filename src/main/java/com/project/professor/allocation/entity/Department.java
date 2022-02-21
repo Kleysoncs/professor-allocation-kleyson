@@ -1,5 +1,6 @@
 package com.project.professor.allocation.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,8 @@ public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	@Column(nullable = false, unique = true)
 	private String name;
 
 	public Long getId() {
