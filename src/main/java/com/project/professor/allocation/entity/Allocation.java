@@ -95,4 +95,12 @@ public class Allocation {
 	public void setProfessorId(Long professorId) {
 		this.professorId = professorId;
 	}
+
+	@Override
+	public String toString() {
+		return "Allocation [id=" + id + ", day=" + day + ", start=" + start + ", end=" + end + ", courseId=" + courseId
+				+ ", professorId=" + professorId + ", professor=" + professor + ", course=" + course + "]";
+	}
+	
+	
 }
