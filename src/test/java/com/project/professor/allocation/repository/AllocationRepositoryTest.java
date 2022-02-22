@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -39,9 +40,11 @@ public class AllocationRepositoryTest {
 		// Arrange
 
 		// Act
+		Optional<Allocation> optional = allocationRepository.findById(1L);
 
 		// Print
-
+		Allocation allocation = optional.orElse(null);
+		System.out.println(allocation);
 	}
 
 	@Test
@@ -68,21 +71,36 @@ public class AllocationRepositoryTest {
 	public void save_create() throws ParseException {
 		// Arrange
 		Allocation allocation = new Allocation();
+		allocation.setDay(DayOfWeek.MONDAY);
+		allocation.setCourseId(1L);
+		allocation.setProfessorId(1L);
+		allocation.setStart(sdf.parse("10:00-0300"));
+		allocation.setEnd(sdf.parse("13:00-0300"));
 
 		// Act
-		allocationRepository.save(null);
+		Allocation allocationNew = allocationRepository.save(allocation);
 
 		// Print
+		System.out.println(allocationNew);
 
 	}
 
 	@Test
 	public void save_update() throws ParseException {
 		// Arrange
+		Allocation allocation = new Allocation();
+		allocation.setId(1L);
+		allocation.setDay(DayOfWeek.SATURDAY);
+		allocation.setCourseId(1L);
+		allocation.setProfessorId(1L);
+		allocation.setStart(sdf.parse("19:00-0300"));
+		allocation.setEnd(sdf.parse("22:00-0300"));
 
 		// Act
+		Allocation allocationNew = allocationRepository.save(allocation);
 
 		// Print
+		System.out.println(allocationNew);
 
 	}
 
@@ -91,12 +109,14 @@ public class AllocationRepositoryTest {
 		// Arrange
 
 		// Act
+		allocationRepository.deleteById(2L);
 
 	}
 
 	@Test
 	public void deleteAll() {
 		// Act
+		allocationRepository.deleteAllInBatch();
 
 	}
 }
