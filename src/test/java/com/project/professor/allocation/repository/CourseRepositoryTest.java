@@ -73,7 +73,7 @@ public class CourseRepositoryTest {
     public void save_create() throws ParseException {
         // Arrange
         Course course = new Course();
-        course.setName("Cálculo IV");
+        course.setName("Orientacao ao Objeto");
 
         // Act
         course = courseRepository.save(course);

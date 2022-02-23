@@ -73,9 +73,9 @@ public class ProfessorRepositoryTest {
     public void save_create() throws ParseException {
         // Arrange
         Professor professor = new Professor();
-        professor.setName("Carlos Meireles");
-        professor.setCpf("14725836978");
-        professor.setDepartmentId(4L);
+        professor.setName("Eduardo Moura");
+        professor.setCpf("78945612336");
+        professor.setDepartmentId(2L);
 
         // Act
         professor = professorRepository.save(professor);
