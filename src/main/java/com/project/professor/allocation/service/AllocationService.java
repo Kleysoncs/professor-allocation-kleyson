@@ -30,14 +30,14 @@ public class AllocationService {
 
 	}
 
-	public Allocation Create(Allocation allocation) {
+	public Allocation create(Allocation allocation) {
 
 		allocation.setId(null);
 		return allocationRepository.save(allocation);
 
 	}
 
-	public Allocation Update(Allocation allocation) {
+	public Allocation update(Allocation allocation) {
 
 		Long id = allocation.getId();
 		if (id != null && allocationRepository.existsById(id)) {
