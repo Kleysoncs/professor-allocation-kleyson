@@ -1,6 +1,8 @@
 package com.project.professor.allocation.repository;
 
 import com.project.professor.allocation.entity.Allocation;
+import com.project.professor.allocation.entity.Course;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -26,21 +28,23 @@ public class CourseRepositoryTest {
     @Test
     public void findAll() {
         // Act
-        
+        List<Course> courses = courseRepository.findAll();
 
         // Print
+        courses.forEach(System.out::println);
         
     }
 
     @Test
     public void findById() {
         // Arrange
-        
+    	Long id = 1L;
 
         // Act
-        
+        Course course = courseRepository.findById(id).orElse(null);
 
         // Print
+        System.out.println(course);
         
     }
 
@@ -71,39 +75,46 @@ public class CourseRepositoryTest {
     @Test
     public void save_create() throws ParseException {
         // Arrange
-        
+        Course course = new Course();
+        course.setName("Cálculo IV");
 
         // Act
-        
+        course = courseRepository.save(course);
 
         // Print
+        System.out.println(course);
         
     }
 
     @Test
     public void save_update() throws ParseException {
-        // Arrange
-        
+    	// Arrange
+        Course course = new Course();
+        course.setId(2L);
+        course.setName("Cálculo IV");
 
         // Act
-        
+        course = courseRepository.save(course);
 
         // Print
+        System.out.println(course);
         
     }
 
     @Test
     public void deleteById() {
         // Arrange
-        
+    	Long id = 1L;
 
         // Act
+    	courseRepository.deleteById(id);
         
     }
 
     @Test
     public void deleteAll() {
         // Act
+    	courseRepository.deleteAllInBatch();
         
     }
 }

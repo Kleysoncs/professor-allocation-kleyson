@@ -1,6 +1,7 @@
 package com.project.professor.allocation.repository;
 
 import com.project.professor.allocation.entity.Allocation;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -32,15 +33,16 @@ public class AllocationRepositoryTest {
 		List<Allocation> allocations = allocationRepository.findAll();
 
 		// Print
-		System.out.println(allocations);
+		allocations.forEach(System.out::println);
 	}
 
 	@Test
 	public void findById() {
 		// Arrange
+		Long id = 1L;
 
 		// Act
-		Optional<Allocation> optional = allocationRepository.findById(1L);
+		Optional<Allocation> optional = allocationRepository.findById(id);
 
 		// Print
 		Allocation allocation = optional.orElse(null);
@@ -50,20 +52,26 @@ public class AllocationRepositoryTest {
 	@Test
 	public void findByProfessorId() {
 		// Arrange
+		Long professorId = 1L;
 
 		// Act
+		List<Allocation> allocations = allocationRepository.findByProfessorId(professorId);
 
 		// Print
+		allocations.forEach(System.out::println);
 
 	}
 
 	@Test
 	public void findByCourseId() {
 		// Arrange
+		Long courseId = 1L;
 
 		// Act
+		List<Allocation> allocations = allocationRepository.findByCourseId(courseId);
 
 		// Print
+		allocations.forEach(System.out::println);
 
 	}
 
@@ -78,10 +86,10 @@ public class AllocationRepositoryTest {
 		allocation.setEnd(sdf.parse("13:00-0300"));
 
 		// Act
-		Allocation allocationNew = allocationRepository.save(allocation);
+		allocation = allocationRepository.save(allocation);
 
 		// Print
-		System.out.println(allocationNew);
+		System.out.println(allocation);
 
 	}
 
@@ -97,19 +105,20 @@ public class AllocationRepositoryTest {
 		allocation.setEnd(sdf.parse("22:00-0300"));
 
 		// Act
-		Allocation allocationNew = allocationRepository.save(allocation);
+		allocation = allocationRepository.save(allocation);
 
 		// Print
-		System.out.println(allocationNew);
+		System.out.println(allocation);
 
 	}
 
 	@Test
 	public void deleteById() {
 		// Arrange
+		Long id = 1L;
 
 		// Act
-		allocationRepository.deleteById(2L);
+		allocationRepository.deleteById(id);
 
 	}
 
