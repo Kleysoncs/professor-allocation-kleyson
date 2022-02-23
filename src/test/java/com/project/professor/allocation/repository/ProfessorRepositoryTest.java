@@ -1,6 +1,5 @@
 package com.project.professor.allocation.repository;
 
-import com.project.professor.allocation.entity.Allocation;
 import com.project.professor.allocation.entity.Professor;
 
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.util.List;
 
 @DataJpaTest
