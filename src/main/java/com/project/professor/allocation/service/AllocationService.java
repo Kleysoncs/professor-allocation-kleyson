@@ -53,14 +53,14 @@ public class AllocationService {
 	}
 
 	private Allocation saveInternal(Allocation allocation) {
-		
+
 		if (hasCollision(allocation)) {
-			
+
 			throw new RuntimeException();
-		} 
-		
+		}
+
 		else {
-			
+
 			return allocationRepository.save(allocation);
 		}
 
