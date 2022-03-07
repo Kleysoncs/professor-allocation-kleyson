@@ -5,16 +5,23 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.project.professor.allocation.entity.Allocation;
+import com.project.professor.allocation.entity.Course;
+import com.project.professor.allocation.entity.Professor;
 import com.project.professor.allocation.repository.AllocationRepository;
 
 @Service
 public class AllocationService {
 
 	private final AllocationRepository allocationRepository;
+	private final ProfessorService professorService;
+	private final CourseService courseService;
 
-	public AllocationService(AllocationRepository allocationRepository) {
+	public AllocationService(AllocationRepository allocationRepository, ProfessorService professorService,
+			CourseService courseService) {
 		super();
 		this.allocationRepository = allocationRepository;
+		this.professorService = professorService;
+		this.courseService = courseService;
 	}
 
 	public List<Allocation> findAll() {
@@ -56,12 +63,19 @@ public class AllocationService {
 
 		if (hasCollision(allocation)) {
 
-			throw new RuntimeException();
+			throw new RuntimeException("hasCollision");
 		}
 
 		else {
+			Allocation newAllocation = allocationRepository.save(allocation);
 
-			return allocationRepository.save(allocation);
+			Professor professor = professorService.findById(newAllocation.getProfessorId());
+			Course course = courseService.findById(newAllocation.getCourseId());
+			
+			newAllocation.setProfessor(professor);
+			newAllocation.setCourse(course);
+
+			return newAllocation;
 		}
 
 	}

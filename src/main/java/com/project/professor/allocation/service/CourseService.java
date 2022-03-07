@@ -17,10 +17,15 @@ public class CourseService {
 		this.courseRepository = courseRepository;
 	}
 
-	public List<Course> findAll() {
+	public List<Course> findAll(String name) {
+		if (name == null) {
+			return courseRepository.findAll();
+		}
+		else {
 
-		List<Course> courses = courseRepository.findAll();
-		return courses;
+			return courseRepository.findByNameLikeIgnoreCase(name);
+		
+		}
 	}
 
 	public Course findById(Long id) {
@@ -31,7 +36,7 @@ public class CourseService {
 	public Course create(Course course) {
 
 		course.setId(null);
-		return saveInternal(course);
+		return courseRepository.save(course);
 
 	}
 
@@ -40,23 +45,10 @@ public class CourseService {
 		Long id = course.getId();
 		if (id != null && courseRepository.existsById(id)) {
 
-			return saveInternal(course);
+			return courseRepository.save(course);
 		} else {
 
 			return null;
-		}
-	}
-
-	public Course saveInternal(Course course) {
-
-		if (hasCollision(course)) {
-
-			throw new RuntimeException("The course name already exists.");
-		}
-
-		else {
-
-			return courseRepository.save(course);
 		}
 	}
 
@@ -75,18 +67,4 @@ public class CourseService {
 
 	}
 
-	private boolean hasCollision(Course newCourse) {
-
-		boolean hasCollision = false;
-		List<Course> currentCourses = findAll();
-
-		for (Course currentCourse : currentCourses) {
-			if (currentCourse.getName().equals(newCourse.getName())) {
-				hasCollision = true;
-				break;
-			}
-		}
-
-		return hasCollision;
-	}
 }

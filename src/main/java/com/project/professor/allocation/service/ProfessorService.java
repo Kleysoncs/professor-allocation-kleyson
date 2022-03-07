@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.project.professor.allocation.entity.Department;
 import com.project.professor.allocation.entity.Professor;
 import com.project.professor.allocation.repository.ProfessorRepository;
 
@@ -11,21 +12,30 @@ import com.project.professor.allocation.repository.ProfessorRepository;
 public class ProfessorService {
 
 	private final ProfessorRepository professorRepository;
+	private final DepartmentService departmentService;
 
-	public ProfessorService(ProfessorRepository professorRepository) {
+	public ProfessorService(ProfessorRepository professorRepository, DepartmentService departmentService) {
 		super();
 		this.professorRepository = professorRepository;
+		this.departmentService = departmentService;
 	}
 
-	public List<Professor> findAll() {
+	public List<Professor> findAll(String name) {
+		if (name == null) {
+			return professorRepository.findAll();
+		} else {
+			return professorRepository.findByNameLikeIgnoreCase(name);
+		}
 
-		List<Professor> professors = professorRepository.findAll();
-		return professors;
 	}
 
 	public Professor findById(Long id) {
 
 		return professorRepository.findById(id).orElse(null);
+	}
+
+	public List<Professor> findByDepartment(Long departmentId) {
+		return professorRepository.findByDepartmentId(departmentId);
 	}
 
 	public Professor create(Professor professor) {
@@ -49,15 +59,12 @@ public class ProfessorService {
 
 	public Professor saveInternal(Professor professor) {
 
-		if (hasCollision(professor)) {
+		professor = professorRepository.save(professor);
 
-			throw new RuntimeException("The cpf number already exists.");
-		}
+		Department department = departmentService.findById(professor.getDepartmentId());
+		professor.setDepart(department);
 
-		else {
-
-			return professorRepository.save(professor);
-		}
+		return professor;
 	}
 
 	public void deleteById(Long id) {
@@ -72,21 +79,6 @@ public class ProfessorService {
 	public void deleteAll() {
 
 		professorRepository.deleteAllInBatch();
-	}
-
-	private boolean hasCollision(Professor newProfessor) {
-
-		boolean hasCollision = false;
-		List<Professor> currentProfessors = findAll();
-
-		for (Professor currentProfessor : currentProfessors) {
-			if (currentProfessor.getCpf().equals(newProfessor.getCpf())) {
-				hasCollision = true;
-				break;
-			}
-		}
-
-		return hasCollision;
 	}
 
 }

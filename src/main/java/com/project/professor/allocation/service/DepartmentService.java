@@ -18,10 +18,13 @@ public class DepartmentService {
 
 	}
 
-	public List<Department> findAll() {
+	public List<Department> findAll(String name) {
+		if (name == null) {
+			return departmentRepository.findAll();
+		} else {
 
-		List<Department> departments = departmentRepository.findAll();
-		return departments;
+			return departmentRepository.findByNameLikeIgnoreCase(name);
+		}
 
 	}
 
@@ -33,7 +36,7 @@ public class DepartmentService {
 	public Department create(Department department) {
 
 		department.setId(null);
-		return saveInternal(department);
+		return departmentRepository.save(department);
 
 	}
 
@@ -42,23 +45,10 @@ public class DepartmentService {
 		Long id = department.getId();
 		if (id != null && departmentRepository.existsById(id)) {
 
-			return saveInternal(department);
+			return departmentRepository.save(department);
 		} else {
 
 			return null;
-		}
-	}
-
-	public Department saveInternal(Department department) {
-
-		if (hasCollision(department)) {
-
-			throw new RuntimeException("The department name already exists.");
-		}
-
-		else {
-
-			return departmentRepository.save(department);
 		}
 	}
 
@@ -73,21 +63,6 @@ public class DepartmentService {
 	public void deleteAll() {
 
 		departmentRepository.deleteAllInBatch();
-	}
-
-	private boolean hasCollision(Department newDepartment) {
-
-		boolean hasCollision = false;
-		List<Department> currentDepartments = findAll();
-
-		for (Department currentDepartment : currentDepartments) {
-			if (currentDepartment.getName().equals(newDepartment.getName())) {
-				hasCollision = true;
-				break;
-			}
-		}
-
-		return hasCollision;
 	}
 
 }
