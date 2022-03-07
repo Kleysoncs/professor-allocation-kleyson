@@ -96,11 +96,29 @@ public class Allocation {
 		this.professorId = professorId;
 	}
 
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	@Override
 	public String toString() {
 		return "Allocation [id=" + id + ", day=" + day + ", start=" + start + ", end=" + end + ", courseId=" + courseId
 				+ ", professorId=" + professorId + ", professor=" + professor + ", course=" + course + "]";
 	}
+
+
 	
 	
 }
