@@ -1,6 +1,5 @@
 package com.project.professor.allocation.service;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,10 +19,34 @@ public class ProfessorServiceTest {
 	@Test
 	public void findAll() {
 		
-		List<Professor> professors = professorService.findAll();
+		List<Professor> professors = professorService.findAll(null);
 		professors.forEach(System.out::println);
 		
 	}
+	
+	 @Test
+	    public void findAllByName() {
+	        // Arrange
+	        String name = "professor";
+
+	        // Act
+	        List<Professor> professors = professorService.findAll(name);
+
+	        // Print
+	        professors.forEach(System.out::println);
+	    }
+
+	    @Test
+	    public void findByDepartment() {
+	        // Arrange
+	        Long departmentId = 1L;
+
+	        // Act
+	        List<Professor> professors = professorService.findByDepartment(departmentId);
+
+	        // Print
+	        professors.forEach(System.out::println);
+	    }
 	
 	@Test
 	public void findById() {
@@ -34,7 +57,7 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void save() throws ParseException {
+	public void save() {
 		
 		Professor professor = new Professor();
 		professor.setId(null);
@@ -42,16 +65,24 @@ public class ProfessorServiceTest {
 		professor.setCpf("55522288877");
 		professor.setDepartmentId(3L);
 		
+		professor = professorService.create(professor);
+		
+		System.out.println(professor);
+		
 	}
 	
 	@Test
-	public void update() throws ParseException {
+	public void update() {
 		
 		Professor professor = new Professor();
 		professor.setId(1L);
 		professor.setName("Ricardo Almeida da Silva");
 		professor.setCpf("55522288877");
 		professor.setDepartmentId(3L);
+		
+		professor = professorService.update(professor);
+		
+		System.out.println(professor);
 		
 	}
 	

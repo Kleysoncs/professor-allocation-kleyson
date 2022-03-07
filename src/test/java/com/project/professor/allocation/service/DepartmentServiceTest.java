@@ -1,6 +1,5 @@
 package com.project.professor.allocation.service;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,10 +19,22 @@ public class DepartmentServiceTest {
 	@Test
 	public void findAll() {
 		
-		List<Department> departments = departmentService.findAll();
+		List<Department> departments = departmentService.findAll(null);
 		
 		departments.forEach(System.out::println);
 	}
+	
+    @Test
+    public void findAllByName() {
+        // Arrange
+        String name = "department";
+
+        // Act
+        List<Department> departments = departmentService.findAll(name);
+
+        // Print
+        departments.forEach(System.out::println);
+    }
 	
 	@Test
 	public void findById() {
@@ -34,7 +45,7 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
-	public void save() throws ParseException {
+	public void save() {
 		
 		Department department = new Department();
 		department.setId(null);
@@ -46,13 +57,13 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
-	public void update() throws ParseException {
+	public void update() {
 		
 		Department department = new Department();
 		department.setId(2L);
 		department.setName("Engenharia Mecânica");
 		
-		department = departmentService.create(department);
+		department = departmentService.update(department);
 		
 		System.out.println(department);
 		
