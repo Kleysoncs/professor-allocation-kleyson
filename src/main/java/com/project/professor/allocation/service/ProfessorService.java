@@ -24,7 +24,7 @@ public class ProfessorService {
 		if (name == null) {
 			return professorRepository.findAll();
 		} else {
-			return professorRepository.findByNameLikeIgnoreCase(name);
+			return professorRepository.findByNameContainingIgnoreCase(name);
 		}
 
 	}

@@ -50,7 +50,7 @@ public class ProfessorRepositoryTest {
     	String name = "Jose";
 
         // Act
-        List<Professor> professors = professorRepository.findByNameLikeIgnoreCase(name);
+        List<Professor> professors = professorRepository.findByNameContainingIgnoreCase(name);
 
         // Print
         professors.forEach(System.out::println);

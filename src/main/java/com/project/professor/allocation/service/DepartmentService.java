@@ -23,7 +23,7 @@ public class DepartmentService {
 			return departmentRepository.findAll();
 		} else {
 
-			return departmentRepository.findByNameLikeIgnoreCase(name);
+			return departmentRepository.findByNameContainingIgnoreCase(name);
 		}
 
 	}

@@ -23,7 +23,7 @@ public class CourseService {
 		}
 		else {
 
-			return courseRepository.findByNameLikeIgnoreCase(name);
+			return courseRepository.findByNameContainingIgnoreCase(name);
 		
 		}
 	}

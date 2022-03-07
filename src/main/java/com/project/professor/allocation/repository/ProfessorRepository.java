@@ -10,7 +10,7 @@ import com.project.professor.allocation.entity.Professor;
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 	
-	List<Professor> findByNameLikeIgnoreCase(String name);
+	List<Professor> findByNameContainingIgnoreCase(String name);
 
     List<Professor> findByDepartmentId(Long departmentId);
 

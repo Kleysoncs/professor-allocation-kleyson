@@ -50,7 +50,7 @@ public class CourseRepositoryTest {
         String name = "FrontEnd";
 
         // Act
-        List<Course> courses = courseRepository.findByNameLikeIgnoreCase(name);
+        List<Course> courses = courseRepository.findByNameContainingIgnoreCase(name);
 
         // Print
         courses.forEach(System.out::println);

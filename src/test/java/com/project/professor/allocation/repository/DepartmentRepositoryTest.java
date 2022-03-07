@@ -52,7 +52,7 @@ public class DepartmentRepositoryTest {
 	        String name = "Geográfia";
 
 	        // Act
-	       List<Department> departments = departmentRepository.findByNameLikeIgnoreCase(name);
+	       List<Department> departments = departmentRepository.findByNameContainingIgnoreCase(name);
 
 	        // Print
 	       departments.forEach(System.out::println);
