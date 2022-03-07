@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
-import java.text.ParseException;
 import java.util.List;
 
 @DataJpaTest
@@ -44,35 +43,25 @@ public class CourseRepositoryTest {
         System.out.println(course);
         
     }
-
+    
     @Test
-    public void findByProfessorId() {
+    public void findByNameLikeIgnoreCase() {
         // Arrange
-        
+        String name = "FrontEnd";
 
         // Act
-        
+        List<Course> courses = courseRepository.findByNameLikeIgnoreCase(name);
 
         // Print
+        courses.forEach(System.out::println);
         
     }
 
     @Test
-    public void findByCourseId() {
-        // Arrange
-        
-
-        // Act
-        
-
-        // Print
-        
-    }
-
-    @Test
-    public void save_create() throws ParseException {
+    public void save_create() {
         // Arrange
         Course course = new Course();
+        course.setId(null);
         course.setName("Orientacao ao Objeto");
 
         // Act
@@ -84,7 +73,7 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void save_update() throws ParseException {
+    public void save_update() {
     	// Arrange
         Course course = new Course();
         course.setId(2L);

@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
-import java.text.ParseException;
 import java.util.List;
 
 @DataJpaTest
@@ -44,35 +43,38 @@ public class ProfessorRepositoryTest {
         System.out.println(professor);
         
     }
-
+    
     @Test
-    public void findByProfessorId() {
+    public void findByNameLikeIgnoreCase() {
         // Arrange
-        
+    	String name = "Jose";
 
         // Act
-        
+        List<Professor> professors = professorRepository.findByNameLikeIgnoreCase(name);
 
         // Print
+        professors.forEach(System.out::println);
         
     }
 
     @Test
-    public void findByCourseId() {
+    public void findByDepartmentId() {
         // Arrange
-        
+        Long id = 2L;
 
         // Act
-        
+        List<Professor> professors = professorRepository.findByDepartmentId(id);
 
         // Print
+        professors.forEach(System.out::println);
         
     }
 
     @Test
-    public void save_create() throws ParseException {
+    public void save_create() {
         // Arrange
         Professor professor = new Professor();
+        professor.setId(null);
         professor.setName("Eduardo Moura");
         professor.setCpf("78945612336");
         professor.setDepartmentId(2L);
@@ -86,7 +88,7 @@ public class ProfessorRepositoryTest {
     }
 
     @Test
-    public void save_update() throws ParseException {
+    public void save_update() {
     	// Arrange
         Professor professor = new Professor();
         professor.setId(4L);

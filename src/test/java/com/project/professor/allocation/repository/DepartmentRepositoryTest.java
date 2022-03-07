@@ -11,7 +11,6 @@ import org.springframework.test.context.TestPropertySource;
 
 import com.project.professor.allocation.entity.Department;
 
-import java.text.ParseException;
 import java.util.List;
 
 
@@ -46,35 +45,25 @@ public class DepartmentRepositoryTest {
 	        System.out.println(department);
 	        
 	    }
-
+	    
 	    @Test
-	    public void findByProfessorId() {
+	    public void findByNameLikeIgnoreCase() {
 	        // Arrange
-	        
+	        String name = "Geográfia";
 
 	        // Act
-	        
+	       List<Department> departments = departmentRepository.findByNameLikeIgnoreCase(name);
 
 	        // Print
+	       departments.forEach(System.out::println);
 	        
 	    }
 
 	    @Test
-	    public void findByCourseId() {
-	        // Arrange
-	        
-
-	        // Act
-	        
-
-	        // Print
-	        
-	    }
-
-	    @Test
-	    public void save_create() throws ParseException {
+	    public void save_create() {
 	        // Arrange
 	        Department department = new Department();
+	        department.setId(null);
 	        department.setName("Tecnologia da Informacão");
 
 	        // Act
@@ -86,11 +75,11 @@ public class DepartmentRepositoryTest {
 	    }
 
 	    @Test
-	    public void save_update() throws ParseException {
+	    public void save_update() {
 	    	// Arrange
 	        Department department = new Department();
 	        department.setId(3L);
-	        department.setName("Tecnologia da Informacão");	        
+	        department.setName("Química");	        
 
 	        // Act
 	        department = departmentRepository.save(department);
