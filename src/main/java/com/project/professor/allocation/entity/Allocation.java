@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
+import io.swagger.annotations.ApiModelProperty;
 
 
 @Entity
@@ -34,6 +35,7 @@ public class Allocation {
 	@Column(nullable = false)
 	private DayOfWeek day;
 	
+	@ApiModelProperty(example = "10:00-0300")
 	@JsonFormat(pattern = "HH:mmZ")
     @JsonSerialize(using = DateSerializer.class)
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
@@ -41,6 +43,7 @@ public class Allocation {
 	@Column(nullable = false)
 	private Date start;
 	
+	@ApiModelProperty(example = "12:00-0300")
 	@JsonFormat(pattern = "HH:mmZ")
     @JsonSerialize(using = DateSerializer.class)
     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
