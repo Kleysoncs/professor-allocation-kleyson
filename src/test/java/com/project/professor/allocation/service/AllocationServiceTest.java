@@ -48,10 +48,10 @@ public class AllocationServiceTest {
 		Allocation allocation = new Allocation();
 		allocation.setId(null);
 		allocation.setDay(DayOfWeek.WEDNESDAY);
-		allocation.setStart(sdf.parse("19:00-0300"));
+		allocation.setStart(sdf.parse("17:00-0300"));
 		allocation.setEnd(sdf.parse("20:00-0300"));
-		allocation.setProfessorId(1L);
-		allocation.setCourseId(1L);
+		allocation.setProfessorId(3L);
+		allocation.setCourseId(3L);
 
 		// Act
 		allocation = allocationService.create(allocation);

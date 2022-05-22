@@ -34,7 +34,7 @@ public class CourseRepositoryTest {
     @Test
     public void findById() {
         // Arrange
-    	Long id = 1L;
+    	Long id = 54L;
 
         // Act
         Course course = courseRepository.findById(id).orElse(null);
@@ -47,7 +47,7 @@ public class CourseRepositoryTest {
     @Test
     public void findByNameLikeIgnoreCase() {
         // Arrange
-        String name = "FrontEnd";
+        String name = "You";
 
         // Act
         List<Course> courses = courseRepository.findByNameContainingIgnoreCase(name);
@@ -62,7 +62,7 @@ public class CourseRepositoryTest {
         // Arrange
         Course course = new Course();
         course.setId(null);
-        course.setName("Orientacao ao Objeto");
+        course.setName("Youtube 2");
 
         // Act
         course = courseRepository.save(course);
@@ -76,8 +76,8 @@ public class CourseRepositoryTest {
     public void save_update() {
     	// Arrange
         Course course = new Course();
-        course.setId(2L);
-        course.setName("Cálculo IV");
+        course.setId(4L);
+        course.setName("Youtube 3");
 
         // Act
         course = courseRepository.save(course);
@@ -90,7 +90,7 @@ public class CourseRepositoryTest {
     @Test
     public void deleteById() {
         // Arrange
-    	Long id = 1L;
+    	Long id = 50L;
 
         // Act
     	courseRepository.deleteById(id);
